@@ -69,12 +69,12 @@ namespace _2023_GC_A2_Partiel_POO.Level_1
         // LINQ & Enumerable
         public static float CalculateAverage(int[] input)
         {
-            /*int somme = 0;
+            int somme = 0;
             foreach(int i in input)
             {
                 somme += i;
             }
-            return somme / input.Count();*/
+            return somme / input.Count();
         }
 
     }
