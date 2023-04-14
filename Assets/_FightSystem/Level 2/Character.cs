@@ -48,7 +48,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                return _baseHealth+CurrentEquipment.BonusHealth;
+                return _baseHealth;
             }
         }
         /// <summary>
@@ -58,7 +58,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                return _baseAttack + CurrentEquipment.BonusAttack;
+                return _baseAttack;
             }
         }
         /// <summary>
@@ -68,7 +68,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                return _baseDefense + CurrentEquipment.BonusDefense;
+                return _baseDefense;
             }
         }
         /// <summary>
@@ -78,7 +78,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                return _baseSpeed + CurrentEquipment.BonusSpeed;
+                return _baseSpeed;
             }
         }
         /// <summary>
