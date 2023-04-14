@@ -48,7 +48,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                throw new NotImplementedException();
+                return _baseHealth+CurrentEquipment.BonusHealth;
             }
         }
         /// <summary>
@@ -58,7 +58,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                throw new NotImplementedException();
+                return _baseAttack + CurrentEquipment.BonusAttack;
             }
         }
         /// <summary>
@@ -68,7 +68,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                throw new NotImplementedException();
+                return _baseDefense + CurrentEquipment.BonusDefense;
             }
         }
         /// <summary>
@@ -78,7 +78,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                throw new NotImplementedException();
+                return _baseSpeed + CurrentEquipment.BonusSpeed;
             }
         }
         /// <summary>
@@ -90,7 +90,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// </summary>
         public StatusEffect CurrentStatus { get; private set; }
 
-        public bool IsAlive => throw new NotImplementedException();
+        public bool IsAlive => CurrentHealth>0;
 
 
         /// <summary>
@@ -102,7 +102,8 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <exception cref="NotImplementedException"></exception>
         public void ReceiveAttack(Skill s)
         {
-            throw new NotImplementedException();
+            CurrentHealth -= (int)(s.Power * TypeResolver.GetFactor(_baseType,s.Type));
+            CurrentStatus = StatusEffect.GetNewStatusEffect(s.Status);
         }
         /// <summary>
         /// Equipe un objet au personnage
@@ -111,15 +112,25 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <exception cref="ArgumentNullException">Si equipement est null</exception>
         public void Equip(Equipment newEquipment)
         {
-            throw new NotImplementedException();
+            if (newEquipment == null)
+            {
+                throw new ArgumentNullException();
+            }
+            if (CurrentEquipment == null)
+            {
+                CurrentEquipment = newEquipment;
+            }
+               
         }
         /// <summary>
         /// Desequipe l'objet en cours au personnage
         /// </summary>
         public void Unequip()
         {
-            throw new NotImplementedException();
+            if (CurrentEquipment != null)
+            {
+                CurrentEquipment = null;
+            }
         }
-
     }
 }
