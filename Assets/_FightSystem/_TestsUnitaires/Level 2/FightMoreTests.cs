@@ -29,10 +29,19 @@ namespace _2023_GC_A2_Partiel_POO.Tests.Level_2
         public void TheHealDoesntHealMoreThanTheMaxHP()
         {
             var c = new Character(100, 50, 30, 20, TYPE.NORMAL);
+            var heal = new WishHeal();
+            var p = new Punch();
+            Character pikachu = new Character(100, 50, 30, 20, TYPE.NORMAL);
+            Character bulbizarre = new Character(100, 60, 10, 200, TYPE.NORMAL);
+            Fight f = new Fight(pikachu, bulbizarre);
 
-           // Assert.That(heal, Is.EqualTo(20));
-            Assert.That(c.CurrentHealth, Is.LessThan(80 /*c.CurrentHealth - Heal (20) */ ));
-            Assert.That(c.CurrentHealth, Is.GreaterThan(0));
+            // Both uses heal
+            f.ExecuteTurn(heal, heal);
+            Assert.That(pikachu.CurrentHealth, Is.EqualTo(pikachu.MaxHealth));
+            f.ExecuteTurn(p, p);
+            Assert.That(pikachu.CurrentHealth, Is.EqualTo(60));
+            f.ExecuteTurn(heal, heal);
+            Assert.That(pikachu.CurrentHealth, Is.EqualTo(100));
         }
 
         [Test]

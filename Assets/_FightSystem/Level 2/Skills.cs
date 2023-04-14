@@ -36,4 +36,9 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
     {
         public MagicalGrass() : base(TYPE.NORMAL, 70, StatusPotential.SLEEP) { }
     }
+
+    public class WishHeal : Skill
+    {
+        public WishHeal() : base(TYPE.NORMAL_HEAL, 50, StatusPotential.NONE) { }
+    }
 }

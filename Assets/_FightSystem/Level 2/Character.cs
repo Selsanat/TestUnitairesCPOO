@@ -35,6 +35,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
             _baseDefense = baseDefense;
             _baseSpeed = baseSpeed;
             _baseType = baseType;
+            CurrentHealth = _baseHealth;
         }
         /// <summary>
         /// HP actuel du personnage
@@ -48,7 +49,13 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                return _baseHealth;
+                
+                if (CurrentEquipment != null)
+                {
+                    return _baseHealth + CurrentEquipment.BonusHealth;
+                }
+                    return _baseHealth;
+                
             }
         }
         /// <summary>
@@ -58,6 +65,10 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
+                if (CurrentEquipment != null)
+                {
+                    return _baseAttack + CurrentEquipment.BonusAttack;
+                }
                 return _baseAttack;
             }
         }
@@ -68,6 +79,10 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
+                if (CurrentEquipment != null)
+                {
+                    return _baseDefense + CurrentEquipment.BonusDefense;
+                }
                 return _baseDefense;
             }
         }
@@ -78,6 +93,10 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
+                if (CurrentEquipment != null)
+                {
+                    return _baseSpeed + CurrentEquipment.BonusSpeed;
+                }
                 return _baseSpeed;
             }
         }
@@ -102,8 +121,22 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <exception cref="NotImplementedException"></exception>
         public void ReceiveAttack(Skill s)
         {
-            CurrentHealth -= (int)(s.Power * TypeResolver.GetFactor(_baseType,s.Type));
-            CurrentStatus = StatusEffect.GetNewStatusEffect(s.Status);
+            if (s.Type == TYPE.NORMAL_HEAL) {
+                CurrentHealth += s.Power;
+                if (CurrentHealth > MaxHealth)
+                {
+                    CurrentHealth = MaxHealth;
+                }
+            }
+            else
+            {
+                CurrentHealth -= (int)((s.Power - Defense) * TypeResolver.GetFactor(_baseType, s.Type));
+                if (CurrentHealth < 0)
+                {
+                    CurrentHealth = 0;
+                }
+                CurrentStatus = StatusEffect.GetNewStatusEffect(s.Status);
+            }
         }
         /// <summary>
         /// Equipe un objet au personnage

@@ -173,14 +173,13 @@ namespace _2023_GC_A2_Partiel_POO.Tests.Level_2
         [Test]
         public void FightWithOneShotTurn()
         {
-            Character pikachu = new Character(100, 50, 30, 20, TYPE.NORMAL);
+            Character pikachu = new Character(30, 50, 30, 20, TYPE.NORMAL);
             Character mewtwo = new Character(1000, 5000, 0, 200, TYPE.NORMAL);
             Fight f = new Fight(pikachu, mewtwo);
             Punch p = new Punch();
 
             // mewtwo attacks first, oneshot pikachu, so pikachu doesn't attack
             f.ExecuteTurn(p, p);
-
             Assert.That(pikachu.IsAlive, Is.EqualTo(false));
             Assert.That(mewtwo.IsAlive, Is.EqualTo(true));
             Assert.That(mewtwo.CurrentHealth, Is.EqualTo(mewtwo.MaxHealth));

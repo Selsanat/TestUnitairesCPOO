@@ -10,6 +10,10 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
 
         public Fight(Character character1, Character character2)
         {
+            if (character1 == null || character2 == null)
+            {
+                throw new ArgumentNullException();
+            }
             Character1 = character1;
             Character2 = character2;
         }
@@ -26,7 +30,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
 
 
 
-        public bool IsFightFinished => (Character1.CurrentHealth <= 0) || (Character2.CurrentHealth <= 0);
+        public bool IsFightFinished => !Character1.IsAlive || !Character2.IsAlive;
 
         /// <summary>
         /// Jouer l'enchainement des attaques. Attention à bien gérer l'ordre des attaques par apport à la speed des personnages
@@ -44,34 +48,60 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
             {
                 if (skillFromCharacter1 == null || skillFromCharacter2 == null)
                 {
-                    return;
+                    throw new ArgumentNullException();
                 }
                 else
                 {
 
                     if (Character1.Speed > Character2.Speed)
                     {
-                        Character2.ReceiveAttack(skillFromCharacter1);
-                        Character1.ReceiveAttack(skillFromCharacter2);
+                        if (skillFromCharacter1.Type == TYPE.NORMAL_HEAL)
+                        {
+                            Character1.ReceiveAttack(skillFromCharacter1);
+                        }
+                        else
+                        {
+                            Character2.ReceiveAttack(skillFromCharacter1);
+                        }
+                        if (Character2.IsAlive)
+                        {
+                            if (skillFromCharacter2.Type == TYPE.NORMAL_HEAL)
+                            {
+                                Character2.ReceiveAttack(skillFromCharacter2);
+                            }
+                            else
+                            {
+                                Character1.ReceiveAttack(skillFromCharacter2);
+                            } 
+                        }
 
                     }
                     else
                     {
-                        Character1.ReceiveAttack(skillFromCharacter2);
-                        Character2.ReceiveAttack(skillFromCharacter1);
+                        if (skillFromCharacter2.Type == TYPE.NORMAL_HEAL)
+                        {
+                            Character2.ReceiveAttack(skillFromCharacter2);
+                        }
+                        else
+                        {
+                            Character1.ReceiveAttack(skillFromCharacter2);
+                        }
+                        if (Character1.IsAlive)
+                        {
+                            if (skillFromCharacter1.Type == TYPE.NORMAL_HEAL)
+                            {
+                                Character1.ReceiveAttack(skillFromCharacter1);
+                            }
+                            else
+                            {
+                                Character2.ReceiveAttack(skillFromCharacter1);
+                            }
+                        }
                     }
                 }
             }
-
-
-
-            throw new NotImplementedException();
         }
-
     }
-
-
-    
 }
 
 
