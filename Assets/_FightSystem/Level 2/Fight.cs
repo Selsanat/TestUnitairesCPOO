@@ -5,17 +5,28 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
 {
     public class Fight
     {
+        public bool isVictory;
+        
+ 
+
         public Fight(Character character1, Character character2)
         {
             Character1 = character1;
             Character2 = character2;
         }
 
+
+
         public Character Character1 { get; }
         public Character Character2 { get; }
         /// <summary>
         /// Est-ce la condition de victoire/défaite a été rencontré ?
+        /// 
         /// </summary>
+        /// 
+       
+
+ 
         public bool IsFightFinished => throw new NotImplementedException();
 
         /// <summary>
@@ -26,8 +37,44 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <exception cref="ArgumentNullException">si une des deux attaques est null</exception>
         public void ExecuteTurn(Skill skillFromCharacter1, Skill skillFromCharacter2)
         {
+            if (isVictory)
+            {
+                return;
+            }
+            else
+            {
+                if (skillFromCharacter1 == null || skillFromCharacter2 == null)
+                {
+                    return;
+                }
+                else
+                {
+
+                    if (Character1.Speed > Character2.Speed)
+                    {
+                        Character2.ReceiveAttack(skillFromCharacter1);
+                        Character1.ReceiveAttack(skillFromCharacter2);
+
+                    }
+                    else
+                    {
+                        Character1.ReceiveAttack(skillFromCharacter2);
+                        Character2.ReceiveAttack(skillFromCharacter1);
+                    }
+                }
+            }
+
+
+
             throw new NotImplementedException();
         }
 
     }
+
+
+    
 }
+
+
+
+ 
