@@ -5,7 +5,6 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
 {
     public class Fight
     {
-        public bool isVictory;
         
  
 
@@ -24,10 +23,10 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// 
         /// </summary>
         /// 
-       
 
- 
-        public bool IsFightFinished => throw new NotImplementedException();
+
+
+        public bool IsFightFinished => (Character1.CurrentHealth <= 0) || (Character2.CurrentHealth <= 0);
 
         /// <summary>
         /// Jouer l'enchainement des attaques. Attention à bien gérer l'ordre des attaques par apport à la speed des personnages
@@ -37,7 +36,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <exception cref="ArgumentNullException">si une des deux attaques est null</exception>
         public void ExecuteTurn(Skill skillFromCharacter1, Skill skillFromCharacter2)
         {
-            if (isVictory)
+            if (IsFightFinished)
             {
                 return;
             }
