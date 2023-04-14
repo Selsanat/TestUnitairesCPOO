@@ -47,21 +47,31 @@ namespace _2023_GC_A2_Partiel_POO.Level_1
         // classe Math & MathF
         public static int Floor(float input)
         {
-            throw new NotImplementedException();
+            return (int)input;
         }
 
         // Interdictions :
         // classe Math & MathF
         public static int Ceil(float input)
         {
-            throw new NotImplementedException();
+            if (input > (int)input)
+            {
+                return (int)input + 1;
+            }
+            return (int)input;
         }
 
         // Interdictions :
         // classe Math & MathF
         public static int Round(float input)
         {
-            throw new NotImplementedException();
+                if ((Ceil(input) - input) > input - Floor(input)){
+                    
+                return (int)Floor(input);
+            }
+            return (int)Ceil(input);
+
+
         }
 
         // Interdictions :
@@ -72,7 +82,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_1
             int somme = 0;
             foreach(int i in input)
             {
-                somme += i;
+                somme += Floor(i);
             }
             return somme / input.Count();
         }
